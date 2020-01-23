@@ -43,6 +43,6 @@ public class PersonControlller {
 			      produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Person>> searchPersons( @RequestBody PersonSearchRequestModel personSearchRequestModel ) {
 		List<Person> persons = personService.searchPerson(personSearchRequestModel);
-	    return new ResponseEntity<List<Person>>( persons , HttpStatus.CREATED);
+		return new ResponseEntity<List<Person>>( persons , HttpStatus.OK);
 	}
 }

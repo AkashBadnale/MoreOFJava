@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +55,7 @@ public class PersonService implements IPersonService{
 		*/
 		
 		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		Person person = modelMapper.map(personRequestModel, Person.class);
 		PersonResponseModel personResponseModel = modelMapper.map( personRepository.saveAndFlush(person), PersonResponseModel.class );
 		return personResponseModel;
@@ -77,7 +79,7 @@ public class PersonService implements IPersonService{
 		Long mobile = personSearchRequestModel.getMobile();
 		
 		/*
-		 *  Adding search criteria's for query
+		 *  Adding search criteria's for query using CriteriaBuilder
 		 */
 		List<Predicate> searchCriterias = new ArrayList<>();
 		
